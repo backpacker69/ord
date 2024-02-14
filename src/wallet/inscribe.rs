@@ -1,6 +1,6 @@
 use {
   super::*,
-  bitcoin::{
+  peercoin::{
     blockdata::{opcodes, script},
     key::PrivateKey,
     key::{TapTweak, TweakedKeyPair, TweakedPublicKey, UntweakedKeyPair},
@@ -10,7 +10,7 @@ use {
     taproot::Signature,
     taproot::{ControlBlock, LeafVersion, TapLeafHash, TaprootBuilder},
   },
-  bitcoincore_rpc::bitcoincore_rpc_json::{ImportDescriptors, SignRawTransactionInput, Timestamp},
+  peercoin_rpc::peercoin_rpc_json::{ImportDescriptors, SignRawTransactionInput, Timestamp},
   wallet::transaction_builder::Target,
 };
 

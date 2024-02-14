@@ -1,6 +1,6 @@
 use {
   super::*,
-  bitcoin::{
+  peercoin::{
     absolute::LockTime, consensus::Encodable, opcodes, script, ScriptBuf, Sequence, Transaction,
     TxIn, Witness,
   },
@@ -28,7 +28,8 @@ fn transaction() -> Vec<u8> {
   witness.push([]);
 
   let transaction = Transaction {
-    version: 2,
+    version: 3,
+    timestamp: 0,
     lock_time: LockTime::ZERO,
     input: vec![TxIn {
       previous_output: OutPoint::null(),

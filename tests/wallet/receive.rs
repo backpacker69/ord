@@ -12,5 +12,5 @@ fn receive() {
     .ord_rpc_server(&ord_rpc_server)
     .run_and_deserialize_output::<receive::Output>();
 
-  assert!(output.address.is_valid_for_network(Network::Bitcoin));
+  assert!(output.address.is_valid_for_network(Network::Peercoin));
 }

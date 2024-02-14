@@ -14,8 +14,8 @@ use {
     subcommand::{find::FindRangeOutput, server::query},
     templates::StatusHtml,
   },
-  bitcoin::block::Header,
-  bitcoincore_rpc::{
+  peercoin::block::Header,
+  peercoin_rpc::{
     json::{GetBlockHeaderResult, GetBlockStatsResult},
     Client,
   },
@@ -185,15 +185,15 @@ pub(crate) trait BitcoinCoreRpcResultExt<T> {
   fn into_option(self) -> Result<Option<T>>;
 }
 
-impl<T> BitcoinCoreRpcResultExt<T> for Result<T, bitcoincore_rpc::Error> {
+impl<T> BitcoinCoreRpcResultExt<T> for Result<T, peercoin_rpc::Error> {
   fn into_option(self) -> Result<Option<T>> {
     match self {
       Ok(ok) => Ok(Some(ok)),
-      Err(bitcoincore_rpc::Error::JsonRpc(bitcoincore_rpc::jsonrpc::error::Error::Rpc(
-        bitcoincore_rpc::jsonrpc::error::RpcError { code: -8, .. },
+      Err(peercoin_rpc::Error::JsonRpc(peercoin_rpc::jsonrpc::error::Error::Rpc(
+        peercoin_rpc::jsonrpc::error::RpcError { code: -8, .. },
       ))) => Ok(None),
-      Err(bitcoincore_rpc::Error::JsonRpc(bitcoincore_rpc::jsonrpc::error::Error::Rpc(
-        bitcoincore_rpc::jsonrpc::error::RpcError { message, .. },
+      Err(peercoin_rpc::Error::JsonRpc(peercoin_rpc::jsonrpc::error::Error::Rpc(
+        peercoin_rpc::jsonrpc::error::RpcError { message, .. },
       )))
         if message.ends_with("not found") =>
       {

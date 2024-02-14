@@ -210,7 +210,7 @@ mod tests {
   use {
     super::*,
     crate::wallet::inscribe::{BatchEntry, ParentInfo},
-    bitcoin::policy::MAX_STANDARD_TX_WEIGHT,
+    peercoin::policy::MAX_STANDARD_TX_WEIGHT,
     serde_yaml::{Mapping, Value},
     tempfile::TempDir,
   };

@@ -255,7 +255,7 @@ impl Runestone {
 
 #[cfg(test)]
 mod tests {
-  use {super::*, bitcoin::script::PushBytes};
+  use {super::*, peercoin::script::PushBytes};
 
   fn decipher(integers: &[u128]) -> Runestone {
     let payload = payload(integers);
@@ -273,7 +273,8 @@ mod tests {
         value: 0,
       }],
       lock_time: LockTime::ZERO,
-      version: 2,
+      version: 3,
+      timestamp: 0,
     })
     .unwrap()
     .unwrap()
@@ -299,7 +300,8 @@ mod tests {
           value: 0,
         }],
         lock_time: LockTime::ZERO,
-        version: 2,
+        version: 3,
+        timestamp: 0,
       }),
       None
     );
@@ -312,7 +314,8 @@ mod tests {
         input: Vec::new(),
         output: Vec::new(),
         lock_time: LockTime::ZERO,
-        version: 2,
+        version: 3,
+        timestamp: 0,
       }),
       Ok(None)
     );
@@ -328,7 +331,8 @@ mod tests {
           value: 0
         }],
         lock_time: LockTime::ZERO,
-        version: 2,
+        version: 3,
+        timestamp: 0,
       }),
       Ok(None)
     );
@@ -346,7 +350,8 @@ mod tests {
           value: 0
         }],
         lock_time: LockTime::ZERO,
-        version: 2,
+        version: 3,
+        timestamp: 0,
       }),
       Ok(None)
     );
@@ -365,7 +370,8 @@ mod tests {
           value: 0
         }],
         lock_time: LockTime::ZERO,
-        version: 2,
+        version: 3,
+        timestamp: 0,
       }),
       Ok(None)
     );
@@ -380,7 +386,8 @@ mod tests {
         value: 0,
       }],
       lock_time: LockTime::ZERO,
-      version: 2,
+      version: 3,
+      timestamp: 0,
     })
     .unwrap_err();
   }
@@ -402,7 +409,8 @@ mod tests {
         value: 0,
       }],
       lock_time: LockTime::ZERO,
-      version: 2,
+      version: 3,
+      timestamp: 0,
     })
     .unwrap_err();
   }
@@ -420,7 +428,8 @@ mod tests {
         value: 0,
       }],
       lock_time: LockTime::ZERO,
-      version: 2,
+      version: 3,
+      timestamp: 0,
     })
     .unwrap();
   }
@@ -441,7 +450,8 @@ mod tests {
           value: 0,
         }],
         lock_time: LockTime::ZERO,
-        version: 2,
+        version: 3,
+        timestamp: 0,
       })
       .unwrap()
       .unwrap(),
@@ -469,7 +479,8 @@ mod tests {
           value: 0
         }],
         lock_time: LockTime::ZERO,
-        version: 2,
+        version: 3,
+        timestamp: 0,
       }),
       Ok(Some(Runestone::default()))
     );
@@ -504,7 +515,8 @@ mod tests {
         },
       ],
       lock_time: LockTime::ZERO,
-      version: 2,
+      version: 3,
+      timestamp: 0,
     })
     .unwrap_err();
   }
@@ -1124,7 +1136,8 @@ mod tests {
           value: 0
         }],
         lock_time: LockTime::ZERO,
-        version: 2,
+        version: 3,
+        timestamp: 0,
       }),
       Ok(Some(Runestone {
         edicts: vec![Edict {
@@ -1165,7 +1178,8 @@ mod tests {
           }
         ],
         lock_time: LockTime::ZERO,
-        version: 2,
+        version: 3,
+        timestamp: 0,
       }),
       Ok(Some(Runestone {
         edicts: vec![Edict {
@@ -1205,7 +1219,8 @@ mod tests {
           }
         ],
         lock_time: LockTime::ZERO,
-        version: 2,
+        version: 3,
+        timestamp: 0,
       }),
       Ok(Some(Runestone {
         edicts: vec![Edict {
@@ -1503,7 +1518,8 @@ mod tests {
           value: 0,
         }],
         lock_time: LockTime::ZERO,
-        version: 2,
+        version: 3,
+        timestamp: 0,
       };
 
       let payload = Runestone::payload(&transaction).unwrap().unwrap();

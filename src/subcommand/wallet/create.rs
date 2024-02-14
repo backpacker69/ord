@@ -1,6 +1,6 @@
 use {
   super::*,
-  bitcoin::secp256k1::rand::{self, RngCore},
+  peercoin::secp256k1::rand::{self, RngCore},
 };
 
 #[derive(Serialize, Deserialize)]

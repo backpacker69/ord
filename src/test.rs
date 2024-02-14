@@ -1,6 +1,6 @@
 pub(crate) use {
   super::*,
-  bitcoin::{
+  peercoin::{
     blockdata::{opcodes, script, script::PushBytesBuf},
     constants::COIN_VALUE,
     ScriptBuf, Witness,

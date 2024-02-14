@@ -29,7 +29,7 @@ use {
   },
   anyhow::{anyhow, bail, ensure, Context, Error},
   bip39::Mnemonic,
-  bitcoin::{
+  peercoin::{
     address::{Address, NetworkUnchecked},
     blockdata::{
       constants::{DIFFCHANGE_INTERVAL, MAX_SCRIPT_ELEMENT_SIZE, SUBSIDY_HALVING_INTERVAL},
@@ -43,7 +43,7 @@ use {
     Amount, Block, Network, OutPoint, Script, ScriptBuf, Sequence, Transaction, TxIn, TxOut, Txid,
     Witness,
   },
-  bitcoincore_rpc::{Client, RpcApi},
+  peercoin_rpc::{Client, RpcApi},
   chrono::{DateTime, TimeZone, Utc},
   ciborium::Value,
   clap::{ArgGroup, Parser},
@@ -152,7 +152,7 @@ fn fund_raw_transaction(
     client
       .fund_raw_transaction(
         &buffer,
-        Some(&bitcoincore_rpc::json::FundRawTransactionOptions {
+        Some(&peercoin_rpc::json::FundRawTransactionOptions {
           // NB. This is `fundrawtransaction`'s `feeRate`, which is fee per kvB
           // and *not* fee per vB. So, we multiply the fee rate given by the user
           // by 1000.

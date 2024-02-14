@@ -1,6 +1,6 @@
 use {
   super::*,
-  bitcoin::blockdata::{
+  peercoin::blockdata::{
     opcodes,
     script::{
       self,
@@ -260,7 +260,8 @@ mod tests {
 
   fn parse(witnesses: &[Witness]) -> Vec<ParsedEnvelope> {
     ParsedEnvelope::from_transaction(&Transaction {
-      version: 2,
+      version: 3,
+      timestamp: 0,
       lock_time: LockTime::ZERO,
       input: witnesses
         .iter()

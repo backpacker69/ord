@@ -23,7 +23,7 @@ impl State {
     let mut hashes = Vec::new();
     let mut blocks = BTreeMap::new();
 
-    let genesis_block = bitcoin::blockdata::constants::genesis_block(network);
+    let genesis_block = peercoin::blockdata::constants::genesis_block(network);
     let genesis_block_hash = genesis_block.block_hash();
     hashes.push(genesis_block_hash);
     blocks.insert(genesis_block_hash, genesis_block);
@@ -52,7 +52,8 @@ impl State {
 
   pub(crate) fn push_block(&mut self, subsidy: u64) -> Block {
     let coinbase = Transaction {
-      version: 2,
+      version: 3,
+      timestamp: 0,
       lock_time: LockTime::ZERO,
       input: vec![TxIn {
         previous_output: OutPoint::null(),
@@ -101,6 +102,7 @@ impl State {
       txdata: std::iter::once(coinbase)
         .chain(self.mempool.drain(0..))
         .collect(),
+      signature: Vec::new(),
     };
 
     for tx in block.txdata.iter() {
@@ -163,7 +165,8 @@ impl State {
     }
 
     let mut tx = Transaction {
-      version: 2,
+      version: 3,
+      timestamp: 0,
       lock_time: LockTime::ZERO,
       input,
       output: (0..template.outputs)

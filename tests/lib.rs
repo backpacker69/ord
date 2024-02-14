@@ -2,7 +2,7 @@
 
 use {
   self::{command_builder::CommandBuilder, expected::Expected, test_server::TestServer},
-  bitcoin::{
+  peercoin::{
     address::{Address, NetworkUnchecked},
     blockdata::constants::COIN_VALUE,
     Network, OutPoint, Txid,
@@ -131,22 +131,22 @@ fn etch(
   output
 }
 
-fn envelope(payload: &[&[u8]]) -> bitcoin::Witness {
-  let mut builder = bitcoin::script::Builder::new()
-    .push_opcode(bitcoin::opcodes::OP_FALSE)
-    .push_opcode(bitcoin::opcodes::all::OP_IF);
+fn envelope(payload: &[&[u8]]) -> peercoin::Witness {
+  let mut builder = peercoin::script::Builder::new()
+    .push_opcode(peercoin::opcodes::OP_FALSE)
+    .push_opcode(peercoin::opcodes::all::OP_IF);
 
   for data in payload {
-    let mut buf = bitcoin::script::PushBytesBuf::new();
+    let mut buf = peercoin::script::PushBytesBuf::new();
     buf.extend_from_slice(data).unwrap();
     builder = builder.push_slice(buf);
   }
 
   let script = builder
-    .push_opcode(bitcoin::opcodes::all::OP_ENDIF)
+    .push_opcode(peercoin::opcodes::all::OP_ENDIF)
     .into_script();
 
-  bitcoin::Witness::from_slice(&[script.into_bytes(), Vec::new()])
+  peercoin::Witness::from_slice(&[script.into_bytes(), Vec::new()])
 }
 
 fn runes(rpc_server: &test_bitcoincore_rpc::Handle) -> BTreeMap<Rune, RuneInfo> {

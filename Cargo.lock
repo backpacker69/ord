@@ -493,24 +493,15 @@ dependencies = [
 ]
 
 [[package]]
-name = "bitcoin"
-version = "0.30.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1945a5048598e4189e239d3f809b19bdad4845c4b2ba400d304d2dcf26d2c462"
-dependencies = [
- "bech32 0.9.1",
- "bitcoin-private",
- "bitcoin_hashes 0.12.0",
- "hex_lit",
- "secp256k1",
- "serde",
-]
-
-[[package]]
 name = "bitcoin-private"
 version = "0.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "73290177011694f38ec25e165d0387ab7ea749a4b81cd4c80dae5988229f7a57"
+
+[[package]]
+name = "bitcoin-private"
+version = "0.1.0"
+source = "git+https://github.com/backpacker69/rust-peercoin?branch=0.30.x#b608cb8c67ae517aef3106c1324ec1e535f6e9b4"
 
 [[package]]
 name = "bitcoin_hashes"
@@ -524,7 +515,7 @@ version = "0.12.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "5d7066118b13d4b20b23645932dfb3a81ce7e29f95726c2036fa33cd7b092501"
 dependencies = [
- "bitcoin-private",
+ "bitcoin-private 0.1.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "serde",
 ]
 
@@ -1939,11 +1930,10 @@ checksum = "68354c5c6bd36d73ff3feceb05efa59b6acb7626617f4962be322a825e61f79a"
 [[package]]
 name = "miniscript"
 version = "10.0.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1eb102b66b2127a872dbcc73095b7b47aeb9d92f7b03c2b2298253ffc82c7594"
+source = "git+https://github.com/backpacker69/rust-miniscript?branch=0.10.0#8394961628ae5909fd8381cdf2f6053e35deba4e"
 dependencies = [
- "bitcoin",
- "bitcoin-private",
+ "bitcoin-private 0.1.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "peercoin",
 ]
 
 [[package]]
@@ -2217,7 +2207,6 @@ dependencies = [
  "base64 0.22.0",
  "bech32 0.11.0",
  "bip39",
- "bitcoin",
  "boilerplate",
  "brotli",
  "chrono",
@@ -2242,7 +2231,7 @@ dependencies = [
  "mime_guess",
  "miniscript",
  "mp4",
- "ord-bitcoincore-rpc",
+ "peercoin",
  "ordinals",
  "pretty_assertions",
  "pulldown-cmark",
@@ -2269,36 +2258,10 @@ dependencies = [
 ]
 
 [[package]]
-name = "ord-bitcoincore-rpc"
-version = "0.17.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "16b622f69d68d7201d5186615978aca36ceb7e7c57d7771491d3e261c64ff4d8"
-dependencies = [
- "bitcoin-private",
- "jsonrpc",
- "log",
- "ord-bitcoincore-rpc-json",
- "serde",
- "serde_json",
-]
-
-[[package]]
-name = "ord-bitcoincore-rpc-json"
-version = "0.17.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "5bb35088f918c775bc27fa79e372d034892b216fb7900aeedd6e06654879ad33"
-dependencies = [
- "bitcoin",
- "bitcoin-private",
- "serde",
- "serde_json",
-]
-
-[[package]]
 name = "ordinals"
 version = "0.0.4"
 dependencies = [
- "bitcoin",
+ "peercoin",
  "derive_more",
  "serde",
  "serde_json",
@@ -2334,6 +2297,43 @@ dependencies = [
  "redox_syscall 0.2.16",
  "smallvec 1.13.1",
  "winapi",
+]
+
+[[package]]
+name = "peercoin"
+version = "0.30.2"
+source = "git+https://github.com/backpacker69/rust-peercoin?branch=0.30.x#b608cb8c67ae517aef3106c1324ec1e535f6e9b4"
+dependencies = [
+ "bech32",
+ "bitcoin-private 0.1.0 (git+https://github.com/backpacker69/rust-peercoin?branch=0.30.x)",
+ "bitcoin_hashes 0.12.0",
+ "hex_lit",
+ "secp256k1",
+ "serde",
+]
+
+[[package]]
+name = "peercoin-rpc"
+version = "0.17.1"
+source = "git+https://github.com/backpacker69/rust-peercoin-rpc?branch=master#0a49a4c2ac641070ccfc372e2fe61d592adc3ac8"
+dependencies = [
+ "bitcoin-private 0.1.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "jsonrpc",
+ "log",
+ "peercoin-rpc-json",
+ "serde",
+ "serde_json",
+]
+
+[[package]]
+name = "peercoin-rpc-json"
+version = "0.17.1"
+source = "git+https://github.com/backpacker69/rust-peercoin-rpc?branch=master#0a49a4c2ac641070ccfc372e2fe61d592adc3ac8"
+dependencies = [
+ "bitcoin-private 0.1.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "peercoin",
+ "serde",
+ "serde_json",
 ]
 
 [[package]]
@@ -3301,12 +3301,12 @@ name = "test-bitcoincore-rpc"
 version = "0.0.1"
 dependencies = [
  "base64 0.21.7",
- "bitcoin",
  "hex",
  "jsonrpc-core",
  "jsonrpc-derive",
  "jsonrpc-http-server",
- "ord-bitcoincore-rpc",
+ "peercoin",
+ "peercoin-rpc",
  "reqwest",
  "serde",
  "serde_json",
@@ -4020,3 +4020,13 @@ name = "zeroize"
 version = "1.7.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "525b4ec142c6b68a2d10f01f7bbf6755599ca3f81ea53b8431b7dd348f5fdb2d"
+
+[[patch.unused]]
+name = "bitcoin"
+version = "0.30.1"
+source = "git+https://github.com/captainbuckkets/rust-peercoin?branch=0.30.x-patch#368e25b1fe8138e23cdd0964cef7b79d9abc7ec5"
+
+[[patch.unused]]
+name = "miniscript"
+version = "11.0.0"
+source = "git+https://github.com/backpacker69/rust-miniscript?branch=master#469c113b7258742ba58bf23f9ed3cf8aed514ca8"

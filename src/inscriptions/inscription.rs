@@ -1,7 +1,7 @@
 use {
   super::*,
   anyhow::ensure,
-  bitcoin::{
+  peercoin::{
     blockdata::{opcodes, script},
     ScriptBuf,
   },

@@ -15,7 +15,7 @@ pub enum Chain {
 impl Chain {
   pub(crate) fn network(self) -> Network {
     match self {
-      Self::Mainnet => Network::Bitcoin,
+      Self::Mainnet => Network::Peercoin,
       Self::Testnet => Network::Testnet,
       Self::Signet => Network::Signet,
       Self::Regtest => Network::Regtest,
@@ -24,10 +24,10 @@ impl Chain {
 
   pub(crate) fn default_rpc_port(self) -> u16 {
     match self {
-      Self::Mainnet => 8332,
-      Self::Regtest => 18443,
+      Self::Mainnet => 9902,
+      Self::Regtest => 9904,
       Self::Signet => 38332,
-      Self::Testnet => 18332,
+      Self::Testnet => 9904,
     }
   }
 
@@ -67,7 +67,7 @@ impl Chain {
   }
 
   pub(crate) fn genesis_block(self) -> Block {
-    bitcoin::blockdata::constants::genesis_block(self.network())
+    peercoin::blockdata::constants::genesis_block(self.network())
   }
 
   pub(crate) fn genesis_coinbase_outpoint(self) -> OutPoint {
@@ -80,7 +80,7 @@ impl Chain {
   pub(crate) fn address_from_script(
     self,
     script: &Script,
-  ) -> Result<Address, bitcoin::address::Error> {
+  ) -> Result<Address, peercoin::address::Error> {
     Address::from_script(script, self.network())
   }
 

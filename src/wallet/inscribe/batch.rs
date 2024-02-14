@@ -494,7 +494,7 @@ impl Batch {
 
     let reveal_weight = reveal_tx.weight();
 
-    if !self.no_limit && reveal_weight > bitcoin::Weight::from_wu(MAX_STANDARD_TX_WEIGHT.into()) {
+    if !self.no_limit && reveal_weight > peercoin::Weight::from_wu(MAX_STANDARD_TX_WEIGHT.into()) {
       bail!(
         "reveal transaction weight greater than {MAX_STANDARD_TX_WEIGHT} (MAX_STANDARD_TX_WEIGHT): {reveal_weight}"
       );
@@ -563,7 +563,8 @@ impl Batch {
         .collect(),
       output: outputs,
       lock_time: LockTime::ZERO,
-      version: 2,
+      version: 3,
+      timestamp: 0,
     };
 
     let fee = {

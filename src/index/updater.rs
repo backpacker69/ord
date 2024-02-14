@@ -209,6 +209,7 @@ impl<'index> Updater<'index> {
                 Ok(Block {
                   header: client.get_block_header(&hash)?,
                   txdata: Vec::new(),
+                  signature: Vec::new(),
                 })
               }
             })

@@ -6,7 +6,7 @@ pub struct Epoch(pub u32);
 impl Epoch {
   pub const STARTING_SATS: [Sat; 34] = [
     Sat(0),
-    Sat(1050000000000000),
+    Sat(10500000000000),
     Sat(1575000000000000),
     Sat(1837500000000000),
     Sat(1968750000000000),

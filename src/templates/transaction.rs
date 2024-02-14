@@ -17,12 +17,13 @@ impl PageContent for TransactionHtml {
 
 #[cfg(test)]
 mod tests {
-  use {super::*, bitcoin::blockdata::script};
+  use {super::*, peercoin::blockdata::script};
 
   #[test]
   fn html() {
     let transaction = Transaction {
-      version: 2,
+      version: 3,
+      timestamp: 0,
       lock_time: LockTime::ZERO,
       input: vec![TxIn {
         sequence: Default::default(),

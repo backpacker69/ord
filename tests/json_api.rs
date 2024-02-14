@@ -1,4 +1,4 @@
-use {super::*, bitcoin::BlockHash};
+use {super::*, peercoin::BlockHash};
 
 #[test]
 fn get_sat_without_sat_index() {

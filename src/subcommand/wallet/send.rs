@@ -307,7 +307,8 @@ impl Send {
     };
 
     let unfunded_transaction = Transaction {
-      version: 2,
+      version: 3,
+      timestamp: 0,
       lock_time: LockTime::ZERO,
       input: input
         .into_iter()

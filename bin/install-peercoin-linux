@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+set -euxo pipefail
+
+version=0.12.7
+
+wget \
+  -O bitcoin.tar.gz \
+  https://github.com/peercoin/peercoin/releases/download/v$versionppc/peercoin-$versionppc-x86_64-linux-gnu.tar.gz
+
+tar \
+  -xzvf bitcoin.tar.gz \
+  -C /usr/local/bin \
+  --strip-components 2 \
+  peercoin-$version/bin/{peercoin-cli,peercoind}

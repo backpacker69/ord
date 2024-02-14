@@ -1,13 +1,13 @@
 use {
   super::*,
   base64::{self, Engine},
-  bitcoin::secp256k1::{All, Secp256k1},
-  bitcoin::{
+  peercoin::secp256k1::{All, Secp256k1},
+  peercoin::{
     bip32::{ChildNumber, DerivationPath, ExtendedPrivKey, Fingerprint},
     psbt::Psbt,
     Network,
   },
-  bitcoincore_rpc::bitcoincore_rpc_json::{Descriptor, ImportDescriptors, Timestamp},
+  peercoin_rpc::peercoin_rpc_json::{Descriptor, ImportDescriptors, Timestamp},
   fee_rate::FeeRate,
   futures::{
     future::{self, FutureExt},
@@ -547,7 +547,7 @@ impl Wallet {
     let derivation_path = DerivationPath::master()
       .child(ChildNumber::Hardened { index: 86 })
       .child(ChildNumber::Hardened {
-        index: u32::from(network != Network::Bitcoin),
+        index: u32::from(network != Network::Peercoin),
       })
       .child(ChildNumber::Hardened { index: 0 });
 

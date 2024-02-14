@@ -25,7 +25,7 @@ axum-server = "0.5.0"
 base64 = "0.22.0"
 bech32 = "0.11.0"
 bip39 = "2.0.0"
-bitcoin = { version = "0.30.1", features = ["rand"] }
+peercoin = { git = "https://github.com/backpacker69/rust-peercoin", branch = "0.30.x", features = ["rand"] }
 boilerplate = { version = "1.0.0", features = ["axum"] }
 brotli = "3.4.0"
 chrono = { version = "0.4.19", features = ["serde"] }
@@ -46,9 +46,9 @@ lazy_static = "1.4.0"
 log = "0.4.14"
 mime = "0.3.16"
 mime_guess = "2.0.4"
-miniscript = "10.0.0"
+miniscript = { git = "https://github.com/backpacker69/rust-miniscript", branch = "0.10.0" }
 mp4 = "0.14.0"
-ord-bitcoincore-rpc = "0.17.2"
+peercoin-rpc = { git = "https://github.com/backpacker69/rust-peercoin-rpc", branch = "master" }
 ordinals = { version = "0.0.4", path = "crates/ordinals" }
 redb = "1.5.0"
 regex = "1.6.0"
@@ -95,3 +95,9 @@ path = "tests/lib.rs"
 
 [build-dependencies]
 pulldown-cmark = "0.10.0"
+
+[patch.crates-io]
+
+peercoin = { git = "https://github.com/backpacker69/rust-peercoin", branch = "0.30.x" }
+miniscript = { git = "https://github.com/backpacker69/rust-miniscript", branch = "master" }
+bitcoin = { git = "https://github.com/captainbuckkets/rust-peercoin", branch = "0.30.x-patch" }

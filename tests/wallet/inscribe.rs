@@ -168,7 +168,7 @@ fn regtest_has_no_content_size_limit() {
 #[test]
 fn mainnet_has_no_content_size_limit() {
   let bitcoin_rpc_server = test_bitcoincore_rpc::builder()
-    .network(Network::Bitcoin)
+    .network(Network::Peercoin)
     .build();
 
   let ord_rpc_server = TestServer::spawn(&bitcoin_rpc_server);

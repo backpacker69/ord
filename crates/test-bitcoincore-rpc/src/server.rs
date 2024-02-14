@@ -1,7 +1,7 @@
 use {
   super::*,
   base64::Engine,
-  bitcoin::{
+  peercoin::{
     consensus::Decodable,
     psbt::Psbt,
     secp256k1::{rand, KeyPair, Secp256k1, XOnlyPublicKey},
@@ -49,7 +49,7 @@ impl Api for Server {
   fn get_blockchain_info(&self) -> Result<GetBlockchainInfoResult, jsonrpc_core::Error> {
     Ok(GetBlockchainInfoResult {
       chain: String::from(match self.network {
-        Network::Bitcoin => "main",
+        Network::Peercoin => "main",
         Network::Testnet => "test",
         Network::Signet => "signet",
         Network::Regtest => "regtest",
@@ -278,7 +278,8 @@ impl Api for Server {
     assert_eq!(replaceable, None, "replaceable param not supported");
 
     let tx = Transaction {
-      version: 2,
+      version: 3,
+      timestamp: 0,
       lock_time: LockTime::ZERO,
       input: utxos
         .iter()
@@ -327,12 +328,19 @@ impl Api for Server {
     let mut cursor = Cursor::new(hex::decode(tx).unwrap());
 
     let version = i32::consensus_decode_from_finite_reader(&mut cursor).unwrap();
+    let timestamp =
+    if version < 3 {
+        i32::consensus_decode_from_finite_reader(&mut cursor).unwrap()
+    } else {
+        0
+    };
     let input = Vec::<TxIn>::consensus_decode_from_finite_reader(&mut cursor).unwrap();
     let output = Decodable::consensus_decode_from_finite_reader(&mut cursor).unwrap();
     let lock_time = Decodable::consensus_decode_from_finite_reader(&mut cursor).unwrap();
 
     let mut transaction = Transaction {
       version,
+      timestamp,
       input,
       output,
       lock_time,
@@ -481,7 +489,8 @@ impl Api for Server {
     };
 
     let mut transaction = Transaction {
-      version: 2,
+      version: 3,
+      timestamp: 0,
       lock_time: LockTime::ZERO,
       input: vec![TxIn {
         previous_output: *outpoint,
@@ -564,7 +573,7 @@ impl Api for Server {
             hash: Wtxid::all_zeros(),
             size: 0,
             vsize: 0,
-            version: 2,
+            version: 3,
             locktime: 0,
             vin: Vec::new(),
             vout: transaction
@@ -654,7 +663,7 @@ impl Api for Server {
 
   fn get_raw_change_address(
     &self,
-    _address_type: Option<bitcoincore_rpc::json::AddressType>,
+    _address_type: Option<peercoin_rpc::json::AddressType>,
   ) -> Result<Address, jsonrpc_core::Error> {
     let secp256k1 = Secp256k1::new();
     let key_pair = KeyPair::new(&secp256k1, &mut rand::thread_rng());
@@ -697,7 +706,7 @@ impl Api for Server {
   fn get_new_address(
     &self,
     _label: Option<String>,
-    _address_type: Option<bitcoincore_rpc::json::AddressType>,
+    _address_type: Option<peercoin_rpc::json::AddressType>,
   ) -> Result<Address, jsonrpc_core::Error> {
     let secp256k1 = Secp256k1::new();
     let key_pair = KeyPair::new(&secp256k1, &mut rand::thread_rng());
