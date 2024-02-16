@@ -7,11 +7,11 @@ use super::*;
     .args(&["chain_argument", "signet", "regtest", "testnet"]),
 ))]
 pub struct Options {
-  #[arg(long, help = "Load Bitcoin Core data dir from <BITCOIN_DATA_DIR>.")]
+  #[arg(long, help = "Load Peercoin data dir from <BITCOIN_DATA_DIR>.")]
   pub(crate) bitcoin_data_dir: Option<PathBuf>,
   #[arg(
     long,
-    help = "Authenticate to Bitcoin Core RPC with <BITCOIN_RPC_PASSWORD>."
+    help = "Authenticate to Peercoin RPC with <BITCOIN_RPC_PASSWORD>."
   )]
   pub(crate) bitcoin_rpc_password: Option<String>,
   #[arg(long, help = "Connect to Bitcoin Core RPC at <BITCOIN_RPC_URL>.")]
@@ -32,7 +32,7 @@ pub struct Options {
   pub(crate) config: Option<PathBuf>,
   #[arg(long, help = "Load configuration from <CONFIG_DIR>.")]
   pub(crate) config_dir: Option<PathBuf>,
-  #[arg(long, help = "Load Bitcoin Core RPC cookie file from <COOKIE_FILE>.")]
+  #[arg(long, help = "Load Peercoin RPC cookie file from <COOKIE_FILE>.")]
   pub(crate) cookie_file: Option<PathBuf>,
   #[arg(long, help = "Store index in <DATA_DIR>.")]
   pub(crate) data_dir: Option<PathBuf>,

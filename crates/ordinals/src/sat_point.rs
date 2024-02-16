@@ -1,4 +1,4 @@
-use {super::*, bitcoin::transaction::ParseOutPointError};
+use {super::*, peercoin::transaction::ParseOutPointError};
 
 /// A satpoint identifies the location of a sat in an output.
 ///

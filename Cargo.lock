@@ -2231,8 +2231,9 @@ dependencies = [
  "mime_guess",
  "miniscript",
  "mp4",
- "peercoin",
  "ordinals",
+ "peercoin",
+ "peercoin-rpc",
  "pretty_assertions",
  "pulldown-cmark",
  "redb",
@@ -2261,8 +2262,8 @@ dependencies = [
 name = "ordinals"
 version = "0.0.4"
 dependencies = [
- "peercoin",
  "derive_more",
+ "peercoin",
  "serde",
  "serde_json",
  "thiserror",
@@ -2315,7 +2316,7 @@ dependencies = [
 [[package]]
 name = "peercoin-rpc"
 version = "0.17.1"
-source = "git+https://github.com/backpacker69/rust-peercoin-rpc?branch=master#0a49a4c2ac641070ccfc372e2fe61d592adc3ac8"
+source = "git+https://github.com/backpacker69/rust-peercoin-rpc?branch=master#8a163a9514b93b9bdc482eb3afe0018b586cd877"
 dependencies = [
  "bitcoin-private 0.1.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "jsonrpc",
@@ -2328,7 +2329,7 @@ dependencies = [
 [[package]]
 name = "peercoin-rpc-json"
 version = "0.17.1"
-source = "git+https://github.com/backpacker69/rust-peercoin-rpc?branch=master#0a49a4c2ac641070ccfc372e2fe61d592adc3ac8"
+source = "git+https://github.com/backpacker69/rust-peercoin-rpc?branch=master#8a163a9514b93b9bdc482eb3afe0018b586cd877"
 dependencies = [
  "bitcoin-private 0.1.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "peercoin",
@@ -4020,13 +4021,3 @@ name = "zeroize"
 version = "1.7.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "525b4ec142c6b68a2d10f01f7bbf6755599ca3f81ea53b8431b7dd348f5fdb2d"
-
-[[patch.unused]]
-name = "bitcoin"
-version = "0.30.1"
-source = "git+https://github.com/captainbuckkets/rust-peercoin?branch=0.30.x-patch#368e25b1fe8138e23cdd0964cef7b79d9abc7ec5"
-
-[[patch.unused]]
-name = "miniscript"
-version = "11.0.0"
-source = "git+https://github.com/backpacker69/rust-miniscript?branch=master#469c113b7258742ba58bf23f9ed3cf8aed514ca8"

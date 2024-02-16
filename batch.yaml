@@ -17,7 +17,7 @@ postage: 12345
 reinscribe: true
 
 # sat to inscribe on, can only be used with `same-sat`:
-# sat: 5000000000
+# sat: 50000000
 
 # inscriptions to inscribe
 inscriptions:
@@ -26,7 +26,7 @@ inscriptions:
   # inscription to delegate content to (optional)
   delegate: 6ac5cacb768794f4fd7a78bf00f2074891fce68bd65c4ff36e77177237aacacai0
   # destination (optional, if no destination is specified a new wallet change address will be used)
-  destination: bc1qw508d6qejxtdg4y5r3zarvary0c5xw7kv8f3t4
+  destination: tpc1q2jxppf7n6rwkyxmhyma0l3ch70u58vda2t3ngn
   # inscription metadata (optional)
   metadata:
     title: Delicious Mangos
@@ -42,6 +42,6 @@ inscriptions:
 - file: token.json
 
 - file: tulip.png
-  destination: bc1pdqrcrxa8vx6gy75mfdfj84puhxffh4fq46h3gkp6jxdd0vjcsdyspfxcv6
+  destination: tpc1pwcc0vxwl9y2u7t4xkgpwvtsmhckcunntnrzuv35wr6mfv6d5heast7ch7g
   metadata:
     author: Satoshi Nakamoto

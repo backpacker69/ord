@@ -2,7 +2,7 @@ use {
   super::*,
   crate::{outgoing::Outgoing, wallet::transaction_builder::Target},
   base64::Engine,
-  bitcoin::psbt::Psbt,
+  peercoin::psbt::Psbt,
 };
 
 #[derive(Debug, Parser)]
@@ -166,7 +166,8 @@ impl Send {
     )?;
 
     let unfunded_transaction = Transaction {
-      version: 2,
+      version: 3,
+      timestamp: 0,
       lock_time: LockTime::ZERO,
       input: Vec::new(),
       output: vec![TxOut {

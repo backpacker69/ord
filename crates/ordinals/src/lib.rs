@@ -1,8 +1,8 @@
 //! Types for interoperating with ordinals and inscriptions.
 
 use {
-  bitcoin::constants::{COIN_VALUE, DIFFCHANGE_INTERVAL, SUBSIDY_HALVING_INTERVAL},
-  bitcoin::{
+  peercoin::constants::{COIN_VALUE, DIFFCHANGE_INTERVAL, SUBSIDY_HALVING_INTERVAL},
+  peercoin::{
     consensus::{Decodable, Encodable},
     OutPoint,
   },

@@ -1,7 +1,7 @@
 use {
   super::*,
   base64::Engine,
-  bitcoin::psbt::Psbt,
+  peercoin::psbt::Psbt,
   ord::subcommand::wallet::{balance, create, send},
   std::collections::BTreeMap,
 };
@@ -417,7 +417,7 @@ fn send_btc_with_fee_rate() {
   assert!(f64::abs(fee_rate - 13.3) < 0.1);
 
   assert_eq!(
-    Address::from_script(&tx.output[0].script_pubkey, Network::Bitcoin).unwrap(),
+    Address::from_script(&tx.output[0].script_pubkey, Network::Peercoin).unwrap(),
     "bc1qw508d6qejxtdg4y5r3zarvary0c5xw7kv8f3t4"
       .parse::<Address<NetworkUnchecked>>()
       .unwrap()

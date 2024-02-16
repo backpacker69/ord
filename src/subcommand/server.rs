@@ -2341,8 +2341,8 @@ mod tests {
   #[test]
   fn search_for_blockhash_returns_block() {
     TestServer::new().assert_redirect(
-      "/search/000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f",
-      "/block/000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f",
+      "/search/0000000032fe677166d54963b62a4677d8957e87c508eaa4fd7eb1c880cd27e3",
+      "/block/0000000032fe677166d54963b62a4677d8957e87c508eaa4fd7eb1c880cd27e3",
     );
   }
 
@@ -2909,7 +2909,7 @@ mod tests {
     assert_eq!(
       server.get_json::<api::Output>(format!("/output/{output}")),
       api::Output {
-        value: 5000000000,
+        value: 50000000,
         script_pubkey: String::new(),
         address: None,
         transaction: txid.to_string(),
@@ -3091,7 +3091,7 @@ mod tests {
     assert_eq!(response.status(), StatusCode::OK);
     assert_eq!(
       response.text().unwrap(),
-      "000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f"
+      "0000000032fe677166d54963b62a4677d8957e87c508eaa4fd7eb1c880cd27e3"
     );
   }
 
@@ -3104,7 +3104,7 @@ mod tests {
     assert_eq!(response.status(), StatusCode::OK);
     assert_eq!(
       response.text().unwrap(),
-      "000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f"
+      "0000000032fe677166d54963b62a4677d8957e87c508eaa4fd7eb1c880cd27e3"
     );
   }
 
@@ -3115,7 +3115,7 @@ mod tests {
     let response = test_server.get("/blocktime");
 
     assert_eq!(response.status(), StatusCode::OK);
-    assert_eq!(response.text().unwrap(), "1231006505");
+    assert_eq!(response.text().unwrap(), "1345084287");
   }
 
   #[test]
@@ -3490,7 +3490,7 @@ mod tests {
     TestServer::new().assert_response_regex(
       "/sat/0",
       StatusCode::OK,
-      ".*<dt>timestamp</dt><dd><time>2009-01-03 18:15:05 UTC</time></dd>.*",
+      ".*<dt>timestamp</dt><dd><time>2012-08-16 02:31:27 UTC</time></dd>.*",
     );
   }
 
@@ -3575,11 +3575,11 @@ mod tests {
 <h2>1 Output</h2>
 <ul class=monospace>
   <li>
-    <a href=/output/84aca0d43f45ac753d4744f40b2f54edec3a496b298951735d450e601386089d:0 class=monospace>
-      84aca0d43f45ac753d4744f40b2f54edec3a496b298951735d450e601386089d:0
+    <a href=/output/9462ce3e2ac3fa6f322349b95882a9700ab68d0d9b59ef3d563148718d8b0207:0 class=monospace>
+      9462ce3e2ac3fa6f322349b95882a9700ab68d0d9b59ef3d563148718d8b0207:0
     </a>
     <dl>
-      <dt>value</dt><dd>5000000000</dd>
+      <dt>value</dt><dd>50000000</dd>
       <dt>script pubkey</dt><dd class=monospace></dd>
     </dl>
   </li>
@@ -3676,7 +3676,7 @@ mod tests {
     TestServer::new().assert_response_regex(
       "/input/0/0/0",
       StatusCode::OK,
-      ".*<title>Input /0/0/0</title>.*<h1>Input /0/0/0</h1>.*<dt>text</dt><dd>.*The Times 03/Jan/2009 Chancellor on brink of second bailout for banks</dd>.*",
+      ".*<title>Input /0/0/0</title>.*<h1>Input /0/0/0</h1>.*<dt>text</dt><dd>.*Matonis 07-AUG-2012 Parallel Currencies And The Roadmap To Monetary Freedom</dd>.*",
     );
   }
 
@@ -4197,7 +4197,7 @@ mod tests {
     server.assert_response_regex(
       format!("/inscription/{}", InscriptionId { txid, index: 0 }),
       StatusCode::OK,
-      r".*<dt>value</dt>\s*<dd>5000000000</dd>\s*<dt>preview</dt>.*",
+      r".*<dt>value</dt>\s*<dd>50000000</dd>\s*<dt>preview</dt>.*",
     );
   }
 
@@ -5206,7 +5206,7 @@ next
   <dt>id</dt>
   <dd class=monospace>{id}</dd>
   <dt>value</dt>
-  <dd>5000000000</dd>
+  <dd>50000000</dd>
   .*
 </dl>
 .*
@@ -5572,7 +5572,7 @@ next
         chainwork: [0; 32],
         confirmations: 0,
         difficulty: 0.0,
-        hash: "000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f"
+        hash: "0000000032fe677166d54963b62a4677d8957e87c508eaa4fd7eb1c880cd27e3"
           .parse()
           .unwrap(),
         height: 0,
@@ -5611,7 +5611,7 @@ next
         chainwork: [0; 32],
         confirmations: 0,
         difficulty: 0.0,
-        hash: "56d05060a0280d0712d113f25321158747310ece87ea9e299bde06cf385b8d85"
+        hash: "8db71ecc09d5cdbbea9ffa49ea6475e018d56aac79c766c779b37b1a9533845d"
           .parse()
           .unwrap(),
         height: 1,

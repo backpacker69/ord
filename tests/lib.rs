@@ -7,7 +7,7 @@ use {
     blockdata::constants::COIN_VALUE,
     Network, OutPoint, Txid,
   },
-  bitcoincore_rpc::bitcoincore_rpc_json::ListDescriptorsResult,
+  peercoin_rpc::peercoin_rpc_json::ListDescriptorsResult,
   chrono::{DateTime, Utc},
   executable_path::executable_path,
   ord::{

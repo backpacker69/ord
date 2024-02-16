@@ -1065,7 +1065,7 @@ mod tests {
     .select_outgoing()
     .unwrap();
 
-    builder.outputs[0].0 = "tb1qx4gf3ya0cxfcwydpq8vr2lhrysneuj5d7lqatw"
+    builder.outputs[0].0 = "tpc1qcrtelw6ucvehzlrtkun7w40y2hfxlqd5ne9fqs"
       .parse::<Address<NetworkUnchecked>>()
       .unwrap()
       .assume_checked();
@@ -1621,7 +1621,7 @@ mod tests {
     let after = TransactionBuilder::estimate_vbytes_with(
       0,
       vec![
-        "bc1pxwww0ct9ue7e8tdnlmug5m2tamfn7q06sahstg39ys4c9f3340qqxrdu9k"
+        "tpc1pwcc0vxwl9y2u7t4xkgpwvtsmhckcunntnrzuv35wr6mfv6d5heast7ch7g"
           .parse::<Address<NetworkUnchecked>>()
           .unwrap()
           .assume_checked(),

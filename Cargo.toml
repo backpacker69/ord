@@ -99,5 +99,3 @@ pulldown-cmark = "0.10.0"
 [patch.crates-io]
 
 peercoin = { git = "https://github.com/backpacker69/rust-peercoin", branch = "0.30.x" }
-miniscript = { git = "https://github.com/backpacker69/rust-miniscript", branch = "master" }
-bitcoin = { git = "https://github.com/captainbuckkets/rust-peercoin", branch = "0.30.x-patch" }

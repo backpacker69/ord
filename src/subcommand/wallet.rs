@@ -4,7 +4,7 @@ use {
     inscribe::{Batch, Batchfile, Mode},
     Wallet,
   },
-  bitcoincore_rpc::bitcoincore_rpc_json::ListDescriptorsResult,
+  peercoin_rpc::peercoin_rpc_json::ListDescriptorsResult,
   reqwest::Url,
 };
 

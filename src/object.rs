@@ -120,49 +120,33 @@ mod tests {
       ]),
     );
     case(
-      "bc1qw508d6qejxtdg4y5r3zarvary0c5xw7kv8f3t4",
+      "tpc1q2jxppf7n6rwkyxmhyma0l3ch70u58vda2t3ngn",
       Object::Address(
-        "bc1qw508d6qejxtdg4y5r3zarvary0c5xw7kv8f3t4"
+        "tpc1q2jxppf7n6rwkyxmhyma0l3ch70u58vda2t3ngn"
           .parse()
           .unwrap(),
       ),
     );
     case(
-      "BC1QW508D6QEJXTDG4Y5R3ZARVARY0C5XW7KV8F3T4",
+      "TPC1Q2JXPPF7N6RWKYXMHYMA0L3CH70U58VDA2T3NGN",
       Object::Address(
-        "BC1QW508D6QEJXTDG4Y5R3ZARVARY0C5XW7KV8F3T4"
+        "TPC1Q2JXPPF7N6RWKYXMHYMA0L3CH70U58VDA2T3NGN"
           .parse()
           .unwrap(),
       ),
     );
     case(
-      "tb1qqqqqp399et2xygdj5xreqhjjvcmzhxw4aywxecjdzew6hylgvsesrxh6hy",
+      "tpc1pwcc0vxwl9y2u7t4xkgpwvtsmhckcunntnrzuv35wr6mfv6d5heast7ch7g",
       Object::Address(
-        "tb1qqqqqp399et2xygdj5xreqhjjvcmzhxw4aywxecjdzew6hylgvsesrxh6hy"
+        "tpc1pwcc0vxwl9y2u7t4xkgpwvtsmhckcunntnrzuv35wr6mfv6d5heast7ch7g"
           .parse()
           .unwrap(),
       ),
     );
     case(
-      "TB1QQQQQP399ET2XYGDJ5XREQHJJVCMZHXW4AYWXECJDZEW6HYLGVSESRXH6HY",
+      "TPC1PWCC0VXWL9Y2U7T4XKGPWVTSMHCKCUNNTNRZUV35WR6MFV6D5HEAST7CH7G",
       Object::Address(
-        "TB1QQQQQP399ET2XYGDJ5XREQHJJVCMZHXW4AYWXECJDZEW6HYLGVSESRXH6HY"
-          .parse()
-          .unwrap(),
-      ),
-    );
-    case(
-      "bcrt1qs758ursh4q9z627kt3pp5yysm78ddny6txaqgw",
-      Object::Address(
-        "bcrt1qs758ursh4q9z627kt3pp5yysm78ddny6txaqgw"
-          .parse()
-          .unwrap(),
-      ),
-    );
-    case(
-      "BCRT1QS758URSH4Q9Z627KT3PP5YYSM78DDNY6TXAQGW",
-      Object::Address(
-        "BCRT1QS758URSH4Q9Z627KT3PP5YYSM78DDNY6TXAQGW"
+        "TPC1PWCC0VXWL9Y2U7T4XKGPWVTSMHCKCUNNTNRZUV35WR6MFV6D5HEAST7CH7G"
           .parse()
           .unwrap(),
       ),

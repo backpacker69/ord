@@ -69,7 +69,7 @@ mod tests {
               {txid}:0
             </a>
             <dl>
-              <dt>value</dt><dd>5000000000</dd>
+              <dt>value</dt><dd>50000000</dd>
               <dt>script pubkey</dt><dd class=monospace>OP_0</dd>
             </dl>
           </li>
@@ -78,7 +78,7 @@ mod tests {
               {txid}:1
             </a>
             <dl>
-              <dt>value</dt><dd>5000000000</dd>
+              <dt>value</dt><dd>50000000</dd>
               <dt>script pubkey</dt><dd class=monospace>OP_PUSHNUM_1</dd>
             </dl>
           </li>

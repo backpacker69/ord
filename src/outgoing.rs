@@ -37,7 +37,7 @@ impl FromStr for Outgoing {
           \d+\.\d+
         )
         \ *
-        (bit|btc|cbtc|mbtc|msat|nbtc|pbtc|sat|satoshi|ubtc)
+        (ppc|mppc|sat|satoshi|uppc)
         (s)?
         $
         "
@@ -127,10 +127,10 @@ mod tests {
       ),
     );
 
-    case("0 btc", Outgoing::Amount("0 btc".parse().unwrap()));
-    case("0btc", Outgoing::Amount("0 btc".parse().unwrap()));
-    case("0.0btc", Outgoing::Amount("0 btc".parse().unwrap()));
-    case(".0btc", Outgoing::Amount("0 btc".parse().unwrap()));
+    case("0 ppc", Outgoing::Amount("0 ppc".parse().unwrap()));
+    case("0ppc", Outgoing::Amount("0 ppc".parse().unwrap()));
+    case("0.0ppc", Outgoing::Amount("0 ppc".parse().unwrap()));
+    case(".0ppc", Outgoing::Amount("0 ppc".parse().unwrap()));
 
     case(
       "0 XYZ",
@@ -209,8 +209,8 @@ mod tests {
       ),
     );
 
-    case("0 btc", Outgoing::Amount("0 btc".parse().unwrap()));
-    case("1.2 btc", Outgoing::Amount("1.2 btc".parse().unwrap()));
+    case("0 ppc", Outgoing::Amount("0 ppc".parse().unwrap()));
+    case("1.2 ppc", Outgoing::Amount("1.2 ppc".parse().unwrap()));
 
     case(
       "0 XY•Z",
@@ -259,8 +259,8 @@ mod tests {
     );
 
     case(
-      "3 btc",
-      "\"3 btc\"",
+      "3 ppc",
+      "\"3 ppc\"",
       Outgoing::Amount(Amount::from_sat(3 * COIN_VALUE)),
     );
 

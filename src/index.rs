@@ -2139,13 +2139,13 @@ mod tests {
       context
         .index
         .list(
-          "4a5e1e4baab89f3a32518a88c31bc87f618f76673e2cc77ab2127b7afdeda33b:0"
+          "3c2d8f85fab4d17aac558cc648a1a58acff0de6deb890c29985690052c5993c2:0"
             .parse()
             .unwrap()
         )
         .unwrap()
         .unwrap(),
-      &[(0, 50 * COIN_VALUE)],
+      &[],
     )
   }
 
@@ -2224,12 +2224,12 @@ mod tests {
 
     assert_eq!(
       context.index.list(OutPoint::new(txid, 0)).unwrap().unwrap(),
-      &[(50 * COIN_VALUE, 7499999995)],
+      &[(50 * COIN_VALUE, 74999995)],
     );
 
     assert_eq!(
       context.index.list(OutPoint::new(txid, 1)).unwrap().unwrap(),
-      &[(7499999995, 9999999990)],
+      &[(74999995, 99999990)],
     );
 
     assert_eq!(
@@ -2238,7 +2238,7 @@ mod tests {
         .list(OutPoint::new(coinbase_txid, 0))
         .unwrap()
         .unwrap(),
-      &[(10000000000, 15000000000), (9999999990, 10000000000)],
+      &[(100000000, 150000000), (99999990, 100000000)],
     );
   }
 
@@ -2269,9 +2269,9 @@ mod tests {
         .unwrap()
         .unwrap(),
       &[
-        (15000000000, 20000000000),
-        (9999999990, 10000000000),
-        (14999999990, 15000000000)
+        (150000000, 200000000),
+        (99999990, 100000000),
+        (149999990, 150000000)
       ],
     );
   }
@@ -2388,7 +2388,7 @@ mod tests {
     assert_eq!(
       context.index.find(Sat(50 * COIN_VALUE)).unwrap().unwrap(),
       SatPoint {
-        outpoint: "84aca0d43f45ac753d4744f40b2f54edec3a496b298951735d450e601386089d:0"
+        outpoint: "9462ce3e2ac3fa6f322349b95882a9700ab68d0d9b59ef3d563148718d8b0207:0"
           .parse()
           .unwrap(),
         offset: 0,

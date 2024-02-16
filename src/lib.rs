@@ -170,7 +170,7 @@ pub fn timestamp(seconds: u32) -> DateTime<Utc> {
   Utc.timestamp_opt(seconds.into(), 0).unwrap()
 }
 
-fn target_as_block_hash(target: bitcoin::Target) -> BlockHash {
+fn target_as_block_hash(target: peercoin::Target) -> BlockHash {
   BlockHash::from_raw_hash(Hash::from_byte_array(target.to_le_bytes()))
 }
 
