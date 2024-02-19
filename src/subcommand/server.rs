@@ -8,7 +8,7 @@ use {
   crate::{
     server_config::ServerConfig,
     templates::{
-      BlockHtml, BlocksHtml, ChildrenHtml, ClockSvg, CollectionsHtml, HomeHtml, InputHtml,
+      BlockHtml, BlocksHtml, ChildrenHtml, /*ClockSvg, */CollectionsHtml, HomeHtml, InputHtml,
       InscriptionHtml, InscriptionsBlockHtml, InscriptionsHtml, OutputHtml, PageContent, PageHtml,
       PreviewAudioHtml, PreviewCodeHtml, PreviewFontHtml, PreviewImageHtml, PreviewMarkdownHtml,
       PreviewModelHtml, PreviewPdfHtml, PreviewTextHtml, PreviewUnknownHtml, PreviewVideoHtml,
@@ -193,7 +193,7 @@ impl Server {
           "/children/:inscription_id/:page",
           get(Self::children_paginated),
         )
-        .route("/clock", get(Self::clock))
+        //.route("/clock", get(Self::clock))
         .route("/collections", get(Self::collections))
         .route("/collections/:page", get(Self::collections_paginated))
         .route("/content/:inscription_id", get(Self::content))
@@ -467,7 +467,7 @@ impl Server {
   fn index_height(index: &Index) -> ServerResult<Height> {
     index.block_height()?.ok_or_not_found(|| "genesis block")
   }
-
+/*
   async fn clock(Extension(index): Extension<Arc<Index>>) -> ServerResult<Response> {
     task::block_in_place(|| {
       Ok(
@@ -482,7 +482,7 @@ impl Server {
       )
     })
   }
-
+*/
   async fn sat(
     Extension(server_config): Extension<Arc<ServerConfig>>,
     Extension(index): Extension<Arc<Index>>,
@@ -499,22 +499,13 @@ impl Server {
             .flatten()
         })
       });
-      let blocktime = index.block_time(sat.height())?;
+      //let blocktime = index.block_time(sat.height())?;
       Ok(if accept_json {
         Json(api::Sat {
           number: sat.0,
-          decimal: sat.decimal().to_string(),
-          degree: sat.degree().to_string(),
           name: sat.name(),
-          block: sat.height().0,
-          cycle: sat.cycle(),
-          epoch: sat.epoch().0,
-          period: sat.period(),
-          offset: sat.third(),
           rarity: sat.rarity(),
-          percentile: sat.percentile(),
           satpoint,
-          timestamp: blocktime.timestamp().timestamp(),
           inscriptions,
         })
         .into_response()
@@ -522,7 +513,7 @@ impl Server {
         SatHtml {
           sat,
           satpoint,
-          blocktime,
+          //blocktime,
           inscriptions,
         }
         .page(server_config)

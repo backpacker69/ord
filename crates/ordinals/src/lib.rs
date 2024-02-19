@@ -22,17 +22,14 @@ use {
 pub const CYCLE_EPOCHS: u32 = 6;
 
 pub use {
-  decimal_sat::DecimalSat, degree::Degree, epoch::Epoch, height::Height, rarity::Rarity, sat::Sat,
+  height::Height, rarity::Rarity, sat::Sat,
   sat_point::SatPoint,
 };
 
 #[doc(hidden)]
 pub use self::deserialize_from_str::DeserializeFromStr;
 
-mod decimal_sat;
-mod degree;
 mod deserialize_from_str;
-mod epoch;
 mod height;
 mod rarity;
 mod sat;

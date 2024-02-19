@@ -51,6 +51,7 @@ impl Display for Rarity {
 
 impl From<Sat> for Rarity {
   fn from(sat: Sat) -> Self {
+    /*
     let Degree {
       hour,
       minute,
@@ -69,8 +70,9 @@ impl From<Sat> for Rarity {
     } else if third == 0 {
       Self::Uncommon
     } else {
+    */
       Self::Common
-    }
+    //}
   }
 }
 

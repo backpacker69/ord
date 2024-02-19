@@ -90,7 +90,7 @@ impl<'a, 'db, 'tx> InscriptionUpdater<'a, 'db, 'tx> {
     for (input_index, tx_in) in tx.input.iter().enumerate() {
       // skip subsidy since no inscriptions possible
       if tx_in.previous_output.is_null() {
-        total_input_value += Height(self.height).subsidy();
+        //total_input_value += Height(self.height).subsidy();
         continue;
       }
 
@@ -364,7 +364,11 @@ impl<'a, 'db, 'tx> InscriptionUpdater<'a, 'db, 'tx> {
         offset: self.reward + flotsam.offset - output_value,
         ..flotsam
       }));
-      self.reward += total_input_value - output_value;
+      if output_value > total_input_value {
+          self.reward += output_value - total_input_value;
+      } else {
+          self.reward += total_input_value - output_value;
+      }
       Ok(())
     }
   }
@@ -463,9 +467,11 @@ impl<'a, 'db, 'tx> InscriptionUpdater<'a, 'db, 'tx> {
         }
 
         if let Some(sat) = sat {
+        /*
           if sat.nineball() {
             Charm::Nineball.set(&mut charms);
           }
+        */
 
           if sat.coin() {
             Charm::Coin.set(&mut charms);

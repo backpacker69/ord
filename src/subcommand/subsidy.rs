@@ -15,18 +15,18 @@ pub struct Output {
 
 impl Subsidy {
   pub(crate) fn run(self) -> SubcommandResult {
-    let first = self.height.starting_sat();
+    let first = 0;//self.height.starting_sat();
 
-    let subsidy = self.height.subsidy();
+    let subsidy = 0;//self.height.subsidy();
 
     if subsidy == 0 {
       bail!("block {} has no subsidy", self.height);
     }
 
     Ok(Some(Box::new(Output {
-      first: first.0,
+      first: 0,//first.0,
       subsidy,
-      name: first.name(),
+      name: "".to_string(),//first.name(),
     })))
   }
 }

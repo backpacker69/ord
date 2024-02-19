@@ -1400,9 +1400,11 @@ impl Index {
     let sat = sat.0;
     let rtx = self.begin_read()?;
 
+/*
     if rtx.block_count()? <= Sat(sat).height().n() {
       return Ok(None);
     }
+*/
 
     let outpoint_to_sat_ranges = rtx.0.open_table(OUTPOINT_TO_SAT_RANGES)?;
 
@@ -1432,11 +1434,11 @@ impl Index {
     let range_start = range_start.0;
     let range_end = range_end.0;
     let rtx = self.begin_read()?;
-
+/*
     if rtx.block_count()? < Sat(range_end - 1).height().n() + 1 {
       return Ok(None);
     }
-
+*/
     let Some(mut remaining_sats) = range_end.checked_sub(range_start) else {
       return Err(anyhow!("range end is before range start"));
     };

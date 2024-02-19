@@ -5,13 +5,14 @@ use {super::*, std::num::ParseFloatError};
 pub struct Sat(pub u64);
 
 impl Sat {
+/*
   pub const LAST: Self = Self(Self::SUPPLY - 1);
   pub const SUPPLY: u64 = 2099999997690000;
-
+*/
   pub fn n(self) -> u64 {
     self.0
   }
-
+/*
   pub fn degree(self) -> Degree {
     self.into()
   }
@@ -52,7 +53,7 @@ impl Sat {
   pub fn decimal(self) -> DecimalSat {
     self.into()
   }
-
+*/
   pub fn rarity(self) -> Rarity {
     self.into()
   }
@@ -61,8 +62,11 @@ impl Sat {
   /// Sat::is_common only checks if self is `Rarity::Common` but is
   /// much faster.
   pub fn common(self) -> bool {
+  /*
     let epoch = self.epoch();
     (self.0 - epoch.starting_sat().0) % epoch.subsidy() != 0
+  */
+    true
   }
 
   pub fn coin(self) -> bool {
@@ -70,7 +74,8 @@ impl Sat {
   }
 
   pub fn name(self) -> String {
-    let mut x = Self::SUPPLY - self.0;
+    //let mut x = Self::SUPPLY - self.0;
+    let mut x = self.0;
     let mut name = String::new();
     while x > 0 {
       name.push(
@@ -90,16 +95,19 @@ impl Sat {
       match c {
         'a'..='z' => {
           x = x * 26 + c as u64 - 'a' as u64 + 1;
+          /*
           if x > Self::SUPPLY {
             return Err(ErrorKind::NameRange.error(s));
           }
+          */
         }
         _ => return Err(ErrorKind::NameCharacter.error(s)),
       }
     }
-    Ok(Sat(Self::SUPPLY - x))
+    //Ok(Sat(Self::SUPPLY - x))
+    Ok(Sat(x))
   }
-
+/*
   fn from_degree(degree: &str) -> Result<Self, Error> {
     let (cycle_number, rest) = degree
       .split_once('°')
@@ -220,6 +228,7 @@ impl Sat {
     #[allow(clippy::cast_sign_loss, clippy::cast_possible_truncation)]
     Ok(Sat(n as u64))
   }
+  */
 }
 
 #[derive(Debug, Error)]
@@ -319,22 +328,22 @@ impl FromStr for Sat {
   fn from_str(s: &str) -> Result<Self, Self::Err> {
     if s.chars().any(|c| c.is_ascii_lowercase()) {
       Self::from_name(s)
-    } else if s.contains('°') {
-      Self::from_degree(s)
-    } else if s.contains('%') {
-      Self::from_percentile(s)
-    } else if s.contains('.') {
-      Self::from_decimal(s)
+//    } else if s.contains('°') {
+//      Self::from_degree(s)
+//    } else if s.contains('%') {
+//      Self::from_percentile(s)
+//    } else if s.contains('.') {
+//      Self::from_decimal(s)
     } else {
       let sat = Self(
         s.parse()
           .map_err(|source| ErrorKind::ParseInt { source }.error(s))?,
       );
-      if sat > Self::LAST {
-        Err(ErrorKind::IntegerRange.error(s))
-      } else {
+//      if sat > Self::LAST {
+//        Err(ErrorKind::IntegerRange.error(s))
+//      } else {
         Ok(sat)
-      }
+//      }
     }
   }
 }

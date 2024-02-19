@@ -10,18 +10,18 @@ pub struct Output {
 
 pub(crate) fn run() -> SubcommandResult {
   let mut last = 0;
-
+/*
   loop {
     if Height(last + 1).subsidy() == 0 {
       break;
     }
     last += 1;
   }
-
+*/
   Ok(Some(Box::new(Output {
-    supply: Sat::SUPPLY,
+    supply: 0,//ppctodo get supply from rpc Sat::SUPPLY,
     first: 0,
-    last: Sat::SUPPLY - 1,
+    last: 0, //Sat::SUPPLY - 1,
     last_mined_in_block: last,
   })))
 }

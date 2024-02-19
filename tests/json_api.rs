@@ -18,18 +18,9 @@ fn get_sat_without_sat_index() {
     sat_json,
     api::Sat {
       number: 2099999997689999,
-      decimal: "6929999.0".into(),
-      degree: "5°209999′1007″0‴".into(),
       name: "a".into(),
-      block: 6929999,
-      cycle: 5,
-      epoch: 32,
-      period: 3437,
-      offset: 0,
       rarity: Rarity::Uncommon,
-      percentile: "100%".into(),
       satpoint: None,
-      timestamp: 0,
       inscriptions: vec![],
     }
   )
@@ -56,18 +47,9 @@ fn get_sat_with_inscription_and_sat_index() {
     sat_json,
     api::Sat {
       number: 50 * COIN_VALUE,
-      decimal: "1.0".into(),
-      degree: "0°1′1″0‴".into(),
       name: "nvtcsezkbth".into(),
-      block: 1,
-      cycle: 0,
-      epoch: 0,
-      period: 0,
-      offset: 0,
       rarity: Rarity::Uncommon,
-      percentile: "0.00023809523835714296%".into(),
       satpoint: Some(SatPoint::from_str(&format!("{}:{}:{}", reveal, 0, 0)).unwrap()),
-      timestamp: 1,
       inscriptions: vec![inscription_id],
     }
   )
@@ -112,18 +94,9 @@ fn get_sat_with_inscription_on_common_sat_and_more_inscriptions() {
     sat_json,
     api::Sat {
       number: 3 * 50 * COIN_VALUE + 1,
-      decimal: "3.1".into(),
-      degree: "0°3′3″1‴".into(),
       name: "nvtblvikkiq".into(),
-      block: 3,
-      cycle: 0,
-      epoch: 0,
-      period: 0,
-      offset: 1,
       rarity: Rarity::Common,
-      percentile: "0.000714285715119048%".into(),
       satpoint: Some(SatPoint::from_str(&format!("{}:{}:{}", reveal, 0, 0)).unwrap()),
-      timestamp: 3,
       inscriptions: vec![inscription_id],
     }
   )

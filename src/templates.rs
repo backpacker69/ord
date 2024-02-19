@@ -3,7 +3,7 @@ use {super::*, boilerplate::Boilerplate};
 pub(crate) use {
   block::BlockHtml,
   children::ChildrenHtml,
-  clock::ClockSvg,
+  //clock::ClockSvg,
   collections::CollectionsHtml,
   home::HomeHtml,
   iframe::Iframe,
@@ -32,7 +32,7 @@ pub use {
 pub mod block;
 pub mod blocks;
 mod children;
-mod clock;
+//mod clock;
 pub mod collections;
 mod home;
 mod iframe;

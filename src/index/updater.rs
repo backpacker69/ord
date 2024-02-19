@@ -433,7 +433,7 @@ impl<'index> Updater<'index> {
       lost_sats,
       next_sequence_number,
       outpoint_to_value: &mut outpoint_to_value,
-      reward: Height(self.height).subsidy(),
+      reward: 0,//Height(self.height).subsidy(),
       sat_to_sequence_number: &mut sat_to_sequence_number,
       satpoint_to_sequence_number: &mut satpoint_to_sequence_number,
       sequence_number_to_children: &mut sequence_number_to_children,
@@ -454,12 +454,13 @@ impl<'index> Updater<'index> {
       let mut coinbase_inputs = VecDeque::new();
 
       let h = Height(self.height);
+      /*
       if h.subsidy() > 0 {
         let start = h.starting_sat();
         coinbase_inputs.push_front((start.n(), (start + h.subsidy()).n()));
         self.sat_ranges_since_flush += 1;
       }
-
+      */
       for (tx_offset, (tx, txid)) in block.txdata.iter().enumerate().skip(1) {
         log::trace!("Indexing transaction {tx_offset}…");
 

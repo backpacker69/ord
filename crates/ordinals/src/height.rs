@@ -7,7 +7,7 @@ impl Height {
   pub fn n(self) -> u32 {
     self.0
   }
-
+/*
   pub fn subsidy(self) -> u64 {
     Epoch::from(self).subsidy()
   }
@@ -22,6 +22,7 @@ impl Height {
   pub fn period_offset(self) -> u32 {
     self.0 % DIFFCHANGE_INTERVAL
   }
+  */
 }
 
 impl Add<u32> for Height {

@@ -49,7 +49,7 @@ use {
   clap::{ArgGroup, Parser},
   html_escaper::{Escape, Trusted},
   lazy_static::lazy_static,
-  ordinals::{DeserializeFromStr, Epoch, Height, Rarity, Sat, SatPoint},
+  ordinals::{DeserializeFromStr, Height, Rarity, Sat, SatPoint},
   regex::Regex,
   reqwest::Url,
   serde::{Deserialize, Deserializer, Serialize, Serializer},
