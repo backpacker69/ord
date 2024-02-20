@@ -12,7 +12,7 @@ fn get_sat_without_sat_index() {
   let mut sat_json: api::Sat = serde_json::from_str(&response.text().unwrap()).unwrap();
 
   // this is a hack to ignore the timestamp, since it changes for every request
-  sat_json.timestamp = 0;
+  //sat_json.timestamp = 0;
 
   pretty_assert_eq!(
     sat_json,

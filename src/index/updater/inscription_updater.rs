@@ -357,7 +357,7 @@ impl<'a, 'db, 'tx> InscriptionUpdater<'a, 'db, 'tx> {
         };
         self.update_inscription_location(input_sat_ranges, flotsam, new_satpoint)?;
       }
-      self.lost_sats += self.reward - output_value;
+      //self.lost_sats += self.reward - output_value;
       Ok(())
     } else {
       self.flotsam.extend(inscriptions.map(|flotsam| Flotsam {
@@ -389,7 +389,8 @@ impl<'a, 'db, 'tx> InscriptionUpdater<'a, 'db, 'tx> {
       offset += size;
     }
 
-    unreachable!()
+    //unreachable!()
+    return Some(Sat(0));
   }
 
   fn update_inscription_location(

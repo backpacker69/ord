@@ -454,6 +454,10 @@ impl<'index> Updater<'index> {
       let mut coinbase_inputs = VecDeque::new();
 
       let h = Height(self.height);
+      let start = 0;
+      coinbase_inputs.push_front((0, block.txdata[0].0.output[0].value));
+      inscription_updater.reward = block.txdata[0].0.output[0].value;
+      self.sat_ranges_since_flush += 1;
       /*
       if h.subsidy() > 0 {
         let start = h.starting_sat();
@@ -664,9 +668,14 @@ impl<'index> Updater<'index> {
 
       let mut remaining = output.value;
       while remaining > 0 {
-        let range = input_sat_ranges
-          .pop_front()
-          .ok_or_else(|| anyhow!("insufficient inputs for transaction outputs"))?;
+		let range = match input_sat_ranges.pop_front() {
+			Some(r) => r,
+			None => {
+				// Handle the error case and break out of the loop
+				eprintln!("Error: insufficient inputs for transaction outputs");
+				break;
+			}
+		};
 
         if !Sat(range.0).common() {
           sat_to_satpoint.insert(
