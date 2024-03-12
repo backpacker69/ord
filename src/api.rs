@@ -22,7 +22,7 @@ pub struct Block {
 
 impl Block {
   pub(crate) fn new(
-    block: bitcoin::Block,
+    block: peercoin::Block,
     height: Height,
     best_height: Height,
     inscriptions: Vec<InscriptionId>,
@@ -164,18 +164,18 @@ impl Output {
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
 pub struct Sat {
   pub number: u64,
-  pub decimal: String,
-  pub degree: String,
+  //pub decimal: String,
+  //pub degree: String,
   pub name: String,
-  pub block: u32,
-  pub cycle: u32,
-  pub epoch: u32,
-  pub period: u32,
-  pub offset: u64,
+  //pub block: u32,
+  //pub cycle: u32,
+  //pub epoch: u32,
+  //pub period: u32,
+  //pub offset: u64,
   pub rarity: Rarity,
-  pub percentile: String,
+  //pub percentile: String,
   pub satpoint: Option<SatPoint>,
-  pub timestamp: i64,
+  //pub timestamp: i64,
   pub inscriptions: Vec<InscriptionId>,
 }
 

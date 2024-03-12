@@ -1,4 +1,4 @@
-use {super::*, bitcoincore_rpc::Auth};
+use {super::*, peercoin_rpc::Auth};
 
 #[derive(Default, Debug, Clone, Serialize, Deserialize, PartialEq)]
 #[serde(default, deny_unknown_fields)]
@@ -294,11 +294,11 @@ impl Settings {
         if cfg!(target_os = "linux") {
           dirs::home_dir()
             .ok_or_else(|| anyhow!("failed to get cookie file path: could not get home dir"))?
-            .join(".bitcoin")
+            .join(".peercoin")
         } else {
           dirs::data_dir()
             .ok_or_else(|| anyhow!("failed to get cookie file path: could not get data dir"))?
-            .join("Bitcoin")
+            .join("Peercoin")
         }
       }
     };
@@ -390,7 +390,7 @@ impl Settings {
     let bitcoin_credentials = self.bitcoin_credentials()?;
 
     log::info!(
-      "Connecting to Bitcoin Core at {}",
+      "Connecting to Peercoin at {}",
       self.bitcoin_rpc_url(None)
     );
 
@@ -408,7 +408,7 @@ impl Settings {
     }
 
     let client = Client::new(&rpc_url, bitcoin_credentials)
-      .with_context(|| format!("failed to connect to Bitcoin Core RPC at `{rpc_url}`"))?;
+      .with_context(|| format!("failed to connect to Peercoin RPC at `{rpc_url}`"))?;
 
     let mut checks = 0;
     let rpc_chain = loop {
@@ -419,17 +419,17 @@ impl Settings {
             "test" => Chain::Testnet,
             "regtest" => Chain::Regtest,
             "signet" => Chain::Signet,
-            other => bail!("Bitcoin RPC server on unknown chain: {other}"),
+            other => bail!("Peercoin RPC server on unknown chain: {other}"),
           }
         }
-        Err(bitcoincore_rpc::Error::JsonRpc(bitcoincore_rpc::jsonrpc::Error::Rpc(err)))
+        Err(peercoin_rpc::Error::JsonRpc(peercoin_rpc::jsonrpc::Error::Rpc(err)))
           if err.code == -28 => {}
-        Err(err) => bail!("Failed to connect to Bitcoin Core RPC at `{rpc_url}`:  {err}"),
+        Err(err) => bail!("Failed to connect to Peercoin RPC at `{rpc_url}`:  {err}"),
       }
 
       ensure! {
         checks < 100,
-        "Failed to connect to Bitcoin Core RPC at `{rpc_url}`",
+        "Failed to connect to Peercoin RPC at `{rpc_url}`",
       }
 
       checks += 1;
@@ -439,7 +439,7 @@ impl Settings {
     let ord_chain = self.chain();
 
     if rpc_chain != ord_chain {
-      bail!("Bitcoin RPC server is on {rpc_chain} but ord is on {ord_chain}");
+      bail!("Peercoin server is on {rpc_chain} but ord is on {ord_chain}");
     }
 
     Ok(client)
@@ -463,11 +463,11 @@ impl Settings {
     } else if cfg!(target_os = "linux") {
       dirs::home_dir()
         .ok_or_else(|| anyhow!("failed to get cookie file path: could not get home dir"))?
-        .join(".bitcoin")
+        .join(".peercoin")
     } else {
       dirs::data_dir()
         .ok_or_else(|| anyhow!("failed to get cookie file path: could not get data dir"))?
-        .join("Bitcoin")
+        .join("Peercoin")
     };
 
     let path = self.chain().join_with_data_dir(path);
@@ -595,7 +595,7 @@ mod tests {
       )
       .unwrap_err()
       .to_string(),
-      "no bitcoin RPC password specified"
+      "no peercoin RPC password specified"
     );
   }
 
@@ -611,7 +611,7 @@ mod tests {
       )
       .unwrap_err()
       .to_string(),
-      "no bitcoin RPC username specified"
+      "no peercoin RPC username specified"
     );
   }
 
@@ -628,10 +628,10 @@ mod tests {
   #[test]
   fn auth_with_cookie_file() {
     assert_eq!(
-      parse(&["--cookie-file=/var/lib/Bitcoin/.cookie"])
+      parse(&["--cookie-file=/var/lib/Peercoin/.cookie"])
         .bitcoin_credentials()
         .unwrap(),
-      Auth::CookieFile("/var/lib/Bitcoin/.cookie".into())
+      Auth::CookieFile("/var/lib/Peercoin/.cookie".into())
     );
   }
 
@@ -662,7 +662,7 @@ mod tests {
 
     assert_eq!(
       settings.bitcoin_rpc_client(None).unwrap_err().to_string(),
-      "Bitcoin RPC server is on testnet but ord is on mainnet"
+      "Peercoin RPC server is on testnet but ord is on mainnet"
     );
   }
 
@@ -716,11 +716,11 @@ mod tests {
     let cookie_file = parse(&[]).cookie_file().unwrap().display().to_string();
 
     assert!(cookie_file.ends_with(if cfg!(target_os = "linux") {
-      "/.bitcoin/.cookie"
+      "/.peercoin/.cookie"
     } else if cfg!(windows) {
-      r"\Bitcoin\.cookie"
+      r"\Peercoin\.cookie"
     } else {
-      "/Bitcoin/.cookie"
+      "/Peercoin/.cookie"
     }))
   }
 
@@ -733,11 +733,11 @@ mod tests {
       .to_string();
 
     assert!(cookie_file.ends_with(if cfg!(target_os = "linux") {
-      "/.bitcoin/signet/.cookie"
+      "/.peercoin/signet/.cookie"
     } else if cfg!(windows) {
-      r"\Bitcoin\signet\.cookie"
+      r"\Peercoin\signet\.cookie"
     } else {
-      "/Bitcoin/signet/.cookie"
+      "/Peercoin/signet/.cookie"
     }));
   }
 
@@ -979,10 +979,10 @@ mod tests {
   #[test]
   fn from_env() {
     let env = vec![
-      ("BITCOIN_DATA_DIR", "/bitcoin/data/dir"),
-      ("BITCOIN_RPC_PASSWORD", "bitcoin password"),
+      ("BITCOIN_DATA_DIR", "/peercoin/data/dir"),
+      ("BITCOIN_RPC_PASSWORD", "peercoin password"),
       ("BITCOIN_RPC_URL", "url"),
-      ("BITCOIN_RPC_USERNAME", "bitcoin username"),
+      ("BITCOIN_RPC_USERNAME", "peercoin username"),
       ("CHAIN", "signet"),
       ("COMMIT_INTERVAL", "1"),
       ("CONFIG", "config"),
@@ -1011,10 +1011,10 @@ mod tests {
     pretty_assert_eq!(
       Settings::from_env(env).unwrap(),
       Settings {
-        bitcoin_data_dir: Some("/bitcoin/data/dir".into()),
-        bitcoin_rpc_password: Some("bitcoin password".into()),
+        bitcoin_data_dir: Some("/peercoin/data/dir".into()),
+        bitcoin_rpc_password: Some("peercoin password".into()),
         bitcoin_rpc_url: Some("url".into()),
-        bitcoin_rpc_username: Some("bitcoin username".into()),
+        bitcoin_rpc_username: Some("peercoin username".into()),
         chain: Some(Chain::Signet),
         commit_interval: Some(1),
         config: Some("config".into()),
@@ -1056,10 +1056,10 @@ mod tests {
       Settings::from_options(
         Options::try_parse_from([
           "ord",
-          "--bitcoin-data-dir=/bitcoin/data/dir",
-          "--bitcoin-rpc-password=bitcoin password",
+          "--bitcoin-data-dir=/peercoin/data/dir",
+          "--bitcoin-rpc-password=peercoin password",
           "--bitcoin-rpc-url=url",
-          "--bitcoin-rpc-username=bitcoin username",
+          "--bitcoin-rpc-username=peercoin username",
           "--chain=signet",
           "--commit-interval=1",
           "--config=config",
@@ -1082,10 +1082,10 @@ mod tests {
         .unwrap()
       ),
       Settings {
-        bitcoin_data_dir: Some("/bitcoin/data/dir".into()),
-        bitcoin_rpc_password: Some("bitcoin password".into()),
+        bitcoin_data_dir: Some("/peercoin/data/dir".into()),
+        bitcoin_rpc_password: Some("peercoin password".into()),
         bitcoin_rpc_url: Some("url".into()),
-        bitcoin_rpc_username: Some("bitcoin username".into()),
+        bitcoin_rpc_username: Some("peercoin username".into()),
         chain: Some(Chain::Signet),
         commit_interval: Some(1),
         config: Some("config".into()),
