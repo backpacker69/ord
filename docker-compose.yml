@@ -1,0 +1,40 @@
+version: '3.8'
+services:
+  bitcoind:
+    container_name: peercoind
+    user: 1000:1000
+    image: peercoin/peercoind:0.13.0
+    command: ["-printtoconsole", "-testnet"]
+    restart: always
+    volumes:
+      - ./peercoin.conf:/data/.peercoin/peercoin.conf
+      - peercoin_data:/data/.peercoin
+    ports:
+      - "9905:9905"  # Peercoin P2P port
+      - "9904:9904"  # Peercoin RPC port
+    networks:
+      - peercoin_network
+
+  ord:
+    container_name: ord
+    build:
+      context: .
+    command:  ["--data-dir", "/index-data", "--rpc-url", "peercoind:9904", "server", "--http-port", "8080", "-t"]
+    volumes:
+      - index_data:/index-data
+    environment:
+      - ORD_BITCOIN_RPC_USER=$RPC_USER
+      - ORD_BITCOIN_RPC_PASS=$RPC_PASSWORD
+    ports:
+      - "8080:8080"
+    depends_on:
+      - peercoind
+    networks:
+      - peercoin_network
+
+volumes:
+  peercoin_data:
+  index_data:
+
+networks:
+  peercoin_network:
